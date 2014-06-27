@@ -1,0 +1,131 @@
+/*:::::::::::::::::::::::::::::::::::::::::::
+
+  Responsive No-JS Jumbo-nav by @doot0
+
+  Note: this implementation does not provide styling; do that bit yourself.
+
+  Markup structure:
+
+    <div class="supernav-container">                          :: Primary container
+      <div class="main-nav">                                  :: Contains nav
+        <dt class="has-supercategories">Item title</dt>       :: Primary nav item title
+        <dd class="super-nav">                                :: Jumbo nav instance (can have many)
+          <ul class="super-nav-categories">                   :: Jumbo nav categories container
+            <li>
+              Subcategory title                               :: Title of sub category (can have many)
+              <ul class="super-nav-subcats">                  :: Contains list of items for subcategory
+                <li>Subcategory item</li>
+              </ul>
+            </li>
+          </ul>
+        </dd>
+      </div>
+    </div>
+
+::::::::::::::::::::::::::::::::::::::::::::*/
+
+//Super-nav vars
+$primary-color : #444;
+$mobile-breakpoint : 640px;
+$primary-cat-width : 33.3%;
+$ui-padding : 1em;
+
+.supernav-container{
+  .mobile-nav{
+    display: none;
+  }
+  .mobile-nav.active + .main-nav {
+    display: block !important;
+  }
+  .main-nav{
+    text-align: center;
+    position: relative;
+    .super-nav{
+      display: none;
+      padding: $ui-padding;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: auto;
+      width: 100%;
+      margin: 0 auto;
+      z-index: 1000;
+      max-width: $mobile-breakpoint;
+      background-color: $primary-color;
+      &:hover{display:block;}
+      .super-nav-categories{
+        position: relative;
+        text-align: left;
+        & > li{
+          width: $primary-cat-width;
+          .super-nav-subcats{
+            display: none;
+            position: absolute;
+            left: $primary-cat-width;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+            &:hover{display: block}
+          }
+          &:hover .super-nav-subcats{
+            display: block;
+          }
+        }
+      }
+    }
+    & > dt,
+    & > dd {display: inline-block;}
+    & > dt + dd,
+    & > dd + dt,
+    & > dt + dd,
+    & > dt + dt{
+      margin-left: 1em;
+    }
+    .has-supercategories{
+      &:hover + .super-nav{
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $mobile-breakpoint){
+  .supernav-container{
+    .mobile-nav{display: block}
+    .main-nav{
+      a { display : block; padding: 1em; margin: -1em }
+      display: none;
+      & > dt, & > dd{ display: block;}
+      & > dt + dd,
+      & > dd + dt,
+      & > dt + dd,
+      & > dt + dt{
+        margin-left: 0;
+      }
+      & > dt{
+        padding: 1em;
+        border-top: 1px solid;
+      }
+      .super-nav{
+        display: block;
+        position: static;
+        .super-nav-categories{
+          text-align: center;
+          & > li {
+            font-weight: bold;
+            width : 100%;
+            + li { margin-top: 1em }
+            .super-nav-subcats{
+              font-weight: 400;
+              display: block;
+              position: static;
+              overflow: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+}
