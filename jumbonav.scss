@@ -21,8 +21,6 @@
         </dd>
       </div>
     </div>
-    
-  IMPORTANT: Each super-nav instance MUST be proceeded by a <dt> with the "has-supercategories" class.
 
 ::::::::::::::::::::::::::::::::::::::::::::*/
 
@@ -30,6 +28,7 @@
 $primary-color : #444;
 $mobile-breakpoint : 640px;
 $primary-cat-width : 33.3%;
+$sub-cat-width : 50%;
 $ui-padding : 1em;
 
 .supernav-container{
@@ -70,6 +69,10 @@ $ui-padding : 1em;
             bottom: 0;
             overflow-y: auto;
             &:hover{display: block}
+            & > li {
+              display:inline-block;
+              width : ($sub-cat-width - 1%);
+            }
           }
           &:hover .super-nav-subcats{
             display: block;
@@ -124,6 +127,10 @@ $ui-padding : 1em;
               display: block;
               position: static;
               overflow: visible;
+              & > li {
+                display:block;
+                width : 100%;
+              }
             }
           }
         }
