@@ -76,6 +76,9 @@ $ui-padding : 1em;
           }
           &:hover .super-nav-subcats{
             display: block;
+            &:first-child{
+              display: block;
+            }
           }
         }
       }
@@ -91,6 +94,11 @@ $ui-padding : 1em;
     .has-supercategories{
       &:hover + .super-nav{
         display: block;
+        & > .super-nav-categories > li:first-child {
+          & > .super-nav-subcats{
+            display: block;
+          }
+        }
       }
     }
   }
